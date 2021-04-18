@@ -24,7 +24,7 @@ const PercentageInput: FC<Props> = ({ id, label, value, error, onChange }) => {
       onChange={handleChange}
       variant="outlined"
       type="number"
-      inputProps={{ step: 0.01, min: 0, max: 100 }}
+      inputProps={{ step: 0.01, min: 0 }}
       InputProps={{
         endAdornment: <InputAdornment position="end">%</InputAdornment>,
       }}
