@@ -7,7 +7,7 @@ type Props = {
   value: string;
   error?: string;
   disabled?: boolean;
-  onChange: (value: string) => void;
+  onChange?: (value: string) => void;
 };
 
 const TextInput: FC<Props> = ({
@@ -16,7 +16,7 @@ const TextInput: FC<Props> = ({
   value,
   error,
   disabled,
-  onChange,
+  onChange = (value) => {},
 }) => {
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>

@@ -74,7 +74,6 @@ const ENoteDetailsForm: FC = () => {
             id="maturity"
             label="Maturity"
             value={`${maturity} days`}
-            onChange={(value) => {}}
             disabled
           />
         </Grid>

@@ -1,5 +1,18 @@
 import { useReducer } from 'react';
 
+import {
+  calculateAgioPercentage,
+  calculateAgioValue,
+  calculateAprPercentage,
+  calculateMaturity,
+  // face value re-calculations
+  calculateFaceValueByAgioValue,
+  calculateFaceValueByAgioPercentage,
+  calculateFaceValueByAprPercentage,
+  // floating point rounding
+  roundAndBoundNumeric,
+} from './eNoteDetailsCalculations';
+
 interface State {
   purchasePrice: number;
   paymentDate: Date;
@@ -40,10 +53,10 @@ function reducer(state: State, action: Action): State {
       });
     }
     case 'PAYMENT_DATE_CHANGE': {
-      return handlePaymentDateChange({ ...state, paymentDate: action.value });
+      return handleMaturityChange({ ...state, paymentDate: action.value });
     }
     case 'DUE_DATE_CHANGE': {
-      return handleDueDateChange({ ...state, dueDate: action.value });
+      return handleMaturityChange({ ...state, dueDate: action.value });
     }
     case 'AGIO_PERCENTAGE_CHANGE': {
       return handleAgioPercentageChange({
@@ -69,64 +82,6 @@ function reducer(state: State, action: Action): State {
   }
 }
 
-/**** UTILS ****/
-
-function calculateMaturity(state: State): number {
-  const dateDiff = Number(state.dueDate) - Number(state.paymentDate);
-  const fullDays = dateDiff > 0 ? dateDiff / 86400000 : 0;
-
-  return Math.round(fullDays);
-}
-
-function calculateAgioValue(state: State): number {
-  const { faceValue, purchasePrice } = state;
-  const agioValue = faceValue - purchasePrice;
-
-  return roundAndBoundNumeric(agioValue);
-}
-
-function calculateAgioPercentage(state: State): number {
-  const { faceValue, purchasePrice } = state;
-  const agioPercentage = ((faceValue - purchasePrice) / purchasePrice) * 100;
-
-  return roundAndBoundNumeric(agioPercentage);
-}
-
-function calculateAprPercentage(state: State): number {
-  const { faceValue, purchasePrice, maturity } = state;
-  const aprPercentage = ((faceValue - purchasePrice) / maturity / 100) * 365;
-
-  return roundAndBoundNumeric(aprPercentage);
-}
-
-function calculateFaceValueByAgioPercentage(state: State): number {
-  const { agioPercentage, purchasePrice } = state;
-
-  return roundAndBoundNumeric(
-    (agioPercentage / 100) * purchasePrice + purchasePrice
-  );
-}
-
-function calculateFaceValueByAgioValue(state: State): number {
-  const { agioValue, purchasePrice } = state;
-
-  return agioValue + purchasePrice;
-}
-
-function calculateFaceValueByAprPercentage(state: State): number {
-  const { aprPercentage, purchasePrice, maturity } = state;
-
-  return roundAndBoundNumeric(
-    (aprPercentage / 365) * 100 * maturity + purchasePrice
-  );
-}
-
-function roundAndBoundNumeric(value: number): number {
-  return +Math.max(0, value).toFixed(2);
-}
-
-/**** UTILS ****/
-
 function handleMaturityChange(state: State): State {
   state = { ...state, maturity: calculateMaturity(state) };
 
@@ -140,14 +95,6 @@ function handlePurchasePriceChange(state: State): State {
     agioValue: calculateAgioValue(state),
     aprPercentage: calculateAprPercentage(state),
   };
-}
-
-function handlePaymentDateChange(state: State): State {
-  return handleMaturityChange(state);
-}
-
-function handleDueDateChange(state: State): State {
-  return handleMaturityChange(state);
 }
 
 function handleAgioPercentageChange(state: State): State {

@@ -1,6 +1,6 @@
 import AdapterDateFns from '@material-ui/lab/AdapterDateFns';
 import LocalizationProvider from '@material-ui/lab/LocalizationProvider';
-import './App.css';
+import './App.scss';
 
 import ENoteDetailsForm from './components/ENoteDetailsForm';
 
