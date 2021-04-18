@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
 
@@ -7,12 +7,15 @@ import DateInput from '../inputs/DateInput';
 import TextInput from '../inputs/TextInput';
 import PercentageInput from '../inputs/PercentageInput';
 
-import useDetailsFormReducer from './useDetailsFormReducer';
 import './ENoteDetailsForm.scss';
+import type { Action, State } from '../../hooks/useDetailsFormReducer';
 
-const ENoteDetailsForm: FC = () => {
-  const [state, dispatch] = useDetailsFormReducer();
+type Props = {
+  state: State;
+  dispatch: React.Dispatch<Action>;
+};
 
+const ENoteDetailsForm: FC<Props> = ({ state, dispatch }) => {
   const {
     paymentDate,
     purchasePrice,

@@ -11,7 +11,7 @@ import {
   calculateFaceValueByAprPercentage,
   // floating point rounding
   roundAndBoundNumeric,
-} from './eNoteDetailsCalculations';
+} from './helpers/eNoteDetailsCalculations';
 
 interface State {
   purchasePrice: number;

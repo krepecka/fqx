@@ -1,4 +1,4 @@
-import type { State } from './useDetailsFormReducer';
+import type { State } from '../useDetailsFormReducer';
 
 export function calculateMaturity(state: State): number {
   const dateDiff = Number(state.dueDate) - Number(state.paymentDate);
