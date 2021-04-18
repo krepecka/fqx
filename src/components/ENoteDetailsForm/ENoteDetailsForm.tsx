@@ -8,7 +8,7 @@ import TextInput from '../inputs/TextInput';
 import PercentageInput from '../inputs/PercentageInput';
 
 import './ENoteDetailsForm.scss';
-import type { Action, State } from '../../hooks/useDetailsFormReducer';
+import type { Action, State } from '../../hooks/useDetailsReducer';
 
 type Props = {
   state: State;

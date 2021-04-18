@@ -7,6 +7,7 @@ import './FormStepContainer.scss';
 type Props = {
   stepNumber: number;
   stepTitle: string;
+  submitText: string;
   proceedToNextStep: (ref: RefObject<HTMLElement>) => void;
   isVisible: boolean;
 };
@@ -14,6 +15,7 @@ type Props = {
 const FormStepContainer: FC<Props> = ({
   stepNumber,
   stepTitle,
+  submitText,
   proceedToNextStep,
   isVisible,
   children,
@@ -42,7 +44,7 @@ const FormStepContainer: FC<Props> = ({
             color="primary"
             disableElevation
           >
-            Continue
+            {submitText}
           </Button>
         </div>
       </div>

@@ -1,5 +1,5 @@
-import { reducer } from '../useDetailsFormReducer';
-import type { State, Action } from '../useDetailsFormReducer';
+import { reducer } from '../useDetailsReducer';
+import type { State, Action } from '../useDetailsReducer';
 
 const mockState: State = {
   purchasePrice: 10000,
@@ -12,7 +12,7 @@ const mockState: State = {
   faceValue: 11000,
 };
 
-describe('useDetailsFormReducer', () => {
+describe('useDetailsReducer', () => {
   let newState: State;
   let action: Action;
 

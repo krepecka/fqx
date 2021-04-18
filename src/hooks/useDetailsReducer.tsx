@@ -145,7 +145,7 @@ function handleFaceValueChange(state: State): State {
   };
 }
 
-function useDetailsFormReducer(): [State, React.Dispatch<Action>] {
+function useDetailsReducer(): [State, React.Dispatch<Action>] {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   return [state, dispatch];
@@ -154,4 +154,4 @@ function useDetailsFormReducer(): [State, React.Dispatch<Action>] {
 export { reducer };
 export type { State, Action };
 
-export default useDetailsFormReducer;
+export default useDetailsReducer;
