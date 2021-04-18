@@ -1,15 +1,3 @@
-.formContainer {
-  /* could be some reusable scss const */
-  width: 75%;
-  max-width: 850px;
-  display: flex;
-  /* paddings from constants */
-  padding: 27px 27px;
-  /* colors should be from constants */
-  border: 1px solid #e2e0e0;
-  border-radius: 9px;
-}
-
 .dividerText {
   text-transform: uppercase;
   font-size: small;

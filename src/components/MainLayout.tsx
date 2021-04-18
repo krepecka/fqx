@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useState, RefObject } from 'react';
 
 import FormStepContainer from './FormStepContainer';
 import ENoteDetailsForm from './ENoteDetailsForm';
@@ -17,19 +17,23 @@ const steps = [
 const MainLayout: FC = () => {
   const [currentStep, setCurrentStep] = useState(0);
 
+  const proceedToNextStep = () => {
+    setCurrentStep(currentStep + 1);
+  };
+
   return (
     <>
-      {steps.map(({ Component, stepTitle }, index) =>
-        currentStep >= index ? (
-          <FormStepContainer
-            key={stepTitle}
-            stepNumber={index + 1}
-            stepTitle={stepTitle}
-          >
-            <Component />
-          </FormStepContainer>
-        ) : null
-      )}
+      {steps.map(({ Component, stepTitle }, index) => (
+        <FormStepContainer
+          key={stepTitle}
+          stepNumber={index + 1}
+          stepTitle={stepTitle}
+          proceedToNextStep={proceedToNextStep}
+          isVisible={currentStep >= index}
+        >
+          <Component />
+        </FormStepContainer>
+      ))}
     </>
   );
 };
