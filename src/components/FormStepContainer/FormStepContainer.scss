@@ -1,5 +1,8 @@
+$primary-color: #3f51b5;
+
 .formContainer {
   display: flex;
+  flex-direction: column;
   position: relative;
 
   /* could be some reusable scss const */
@@ -10,6 +13,8 @@
   /* colors should be from constants */
   border: 1px solid #e2e0e0;
   border-radius: 9px;
+
+  margin: 36px 0;
 }
 
 .stepHeader {
@@ -25,7 +30,7 @@
 .stepNumber {
   height: 30px;
   width: 30px;
-  background: blue;
+  background: $primary-color;
   color: white;
   border-radius: 100%;
   text-align: center;
@@ -43,5 +48,9 @@
   text-transform: uppercase;
   font-size: 0.8rem;
   font-weight: 600;
-  color: blue;
+  color: $primary-color;
+}
+
+.buttonContainer {
+  margin-top: 27px;
 }

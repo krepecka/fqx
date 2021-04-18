@@ -1,4 +1,6 @@
 import { FC } from 'react';
+import Button from '@material-ui/core/Button';
+
 import './FormStepContainer.scss';
 
 type Props = {
@@ -14,6 +16,12 @@ const FormStepContainer: FC<Props> = ({ stepNumber, stepTitle, children }) => {
         <div className="stepTitle">{stepTitle}</div>
       </div>
       {children}
+
+      <div className="buttonContainer">
+        <Button variant="contained" color="primary" disableElevation>
+          Continue
+        </Button>
+      </div>
     </div>
   );
 };
