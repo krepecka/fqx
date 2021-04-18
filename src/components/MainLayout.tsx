@@ -1,7 +1,9 @@
-import { FC, useState, RefObject } from 'react';
+import { FC, useState } from 'react';
 
 import FormStepContainer from './FormStepContainer';
 import ENoteDetailsForm from './ENoteDetailsForm';
+import ProfitabilityChart from './ProfitabilityChart';
+import useDetailsFormReducer from '../hooks/useDetailsFormReducer';
 
 const steps = [
   {
@@ -9,13 +11,14 @@ const steps = [
     stepTitle: 'details',
   },
   {
-    Component: ENoteDetailsForm,
+    Component: ProfitabilityChart,
     stepTitle: 'investment growth',
   },
 ];
 
 const MainLayout: FC = () => {
   const [currentStep, setCurrentStep] = useState(0);
+  const [state, dispatch] = useDetailsFormReducer();
 
   const proceedToNextStep = () => {
     setCurrentStep(currentStep + 1);
@@ -31,7 +34,7 @@ const MainLayout: FC = () => {
           proceedToNextStep={proceedToNextStep}
           isVisible={currentStep >= index}
         >
-          <Component />
+          <Component state={state} dispatch={dispatch} />
         </FormStepContainer>
       ))}
     </>
